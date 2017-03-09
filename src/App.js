@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, ButtonGroup, Button, DropdownButton, MenuItem } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, ButtonGroup, Button, DropdownButton, MenuItem } from 'react-bootstrap';
 import logo from './logo.svg';
 import '../css/App.css';
 
-class App extends Component {
+var App = React.createClass({
+
+  getInitialState() {
+    return { 
+      activeKey: 1
+    };
+  },
 
   handleSelect(selectedKey) {
-    console.log(document.getElementsByClassName('App-nav-menu'));
-  }
+    this.setState({activeKey: selectedKey});
+  },
 
   render() {
     return (
@@ -20,18 +26,7 @@ class App extends Component {
         </div>
 
         <div className="App-nav">
-          <ButtonGroup justified>
-            <Button href="#">Left</Button>
-            <Button href="#">Middle</Button>
-            <DropdownButton title="Dropdown" id="bg-justified-dropdown">
-              <MenuItem eventKey="1">Dropdown link</MenuItem>
-              <MenuItem eventKey="2">Dropdown link</MenuItem>
-            </DropdownButton>
-          </ButtonGroup>
-        </div>
-
-        <div className="App-nav2">
-          <Nav className="App-nav-menu" bsStyle="pills" justified activeKey={1} onSelect={this.handleSelect}>
+          <Nav className="App-nav-menu" bsStyle="pills" justified activeKey={this.state.activeKey} onSelect={this.handleSelect}>
             <NavItem eventKey={1}>NavItem 1 content</NavItem>
             <NavItem eventKey={2}>NavItem 2 content</NavItem>
             <NavItem eventKey={3}>NavItem 3 content</NavItem>
@@ -42,6 +37,13 @@ class App extends Component {
 
     );
   }
-}
 
-export default App;
+});
+
+module.exports = App;
+
+// class App extends Component {
+
+// }
+
+// export default App;
